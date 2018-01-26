@@ -564,6 +564,11 @@ void plcrash_log_writer_free (plcrash_log_writer_t *writer) {
         if (writer->uncaught_exception.callstack != NULL)
             free(writer->uncaught_exception.callstack);
     }
+
+    /* Free the allocator */
+    if (writer->allocator != NULL) {
+        plcrash_async_allocator_free(writer->allocator);
+    }
 }
 
 /**
